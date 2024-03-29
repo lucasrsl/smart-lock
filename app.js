@@ -1,5 +1,6 @@
 import path from 'path'
 import AutoLoad from '@fastify/autoload'
+import Cors from '@fastify/cors'
 import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -26,5 +27,10 @@ export default async function (fastify, opts) {
   fastify.register(AutoLoad, {
     dir: path.join(__dirname, 'routes'),
     options: Object.assign({}, opts)
+  })
+
+  // Enables the use of CORS in a Fastify application.
+  await fastify.register(Cors, {
+    origin: false
   })
 }
